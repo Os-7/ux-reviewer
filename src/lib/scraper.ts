@@ -144,7 +144,7 @@ export async function scrapeWebsite(url: string): Promise<ScrapedContent> {
     links: links.slice(0, 50),
     images: images.slice(0, 30),
     mainText,
-    navigation: [...new Set(navigation)].slice(0, 15),
+    navigation: Array.from(new Set(navigation)).slice(0, 15),
     rawHtml: html.substring(0, 50000), // Keep first 50KB for reference
     loadTime,
   }
