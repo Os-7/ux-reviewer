@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  url         String
+  title       String?
+  screenshot  String?  @default("")
+  issues      String   // JSON string of issues array
+  suggestions String   // JSON string of before/after suggestions
+  score       Int?     // Overall UX score 0-100
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
