@@ -1,72 +1,73 @@
 # Prompts Used During Development
 
-This document records the main prompts used to build this application with AI assistance.
+This document records the key prompts I used while building this application with Cursor AI assistance.
 
-## Project Setup
+## Initial Project Setup
 
-### Initial Prompt
+I started by describing what I wanted to build:
+
 ```
+I want to build Option A: Website UX Reviewer
+
 Build a web app where I can:
 - paste a website link
 - the app loads the page and captures key content (title, headings, forms, buttons, main text)
-- the app generates a UX review with:
-  - 8-12 issues grouped by category (clarity, layout, navigation, accessibility, trust)
-  - a short "why this is an issue"
-  - a proof for each issue (a screenshot snippet OR the exact text/element it refers to)
-- show a "before/after" suggestion for the top 3 issues
+- the app generates a UX review with 8-12 issues grouped by category
+- show before/after suggestions for top 3 issues
 - save and view the last 5 reviews
-
-Include:
-- A simple home page with clear steps
-- A status page that shows health of backend, database, and LLM connection
-- Basic handling for empty/wrong input
 ```
 
-## Component Development
+## LLM Provider Selection
 
-### Home Page
+When OpenAI quota ran out, I asked about alternatives:
+
 ```
-Create a home page component with:
-- Hero section explaining what the app does
-- URL input with validation
-- Loading state during analysis
-- Feature highlights
-- Step-by-step guide
+Failed to analyze website: 429 You exceeded your current quota...
+Are there any free resources for this?
 ```
 
-### Review Page
+This led to switching from OpenAI → Google Gemini → Groq (which worked best).
+
+## Database Setup
+
+For production database, I asked:
+
 ```
-Create a review results page that displays:
-- Website title and URL
-- Overall UX score with color coding
-- Issues grouped by category
-- Tabs for issues vs suggestions
-- Before/after comparisons
-- Severity indicators
+How to deploy database in Supabase for my database URL?
 ```
 
-### Status Page
+The AI walked me through:
+1. Creating a Supabase project
+2. Getting connection strings
+3. URL-encoding special characters in password
+4. Updating Prisma schema from SQLite to PostgreSQL
+
+## Export Feature
+
+I requested adding export functionality:
+
 ```
-Create a status page that checks:
-- Backend API health
-- Database connection
-- LLM (OpenAI) connectivity
-Display each service with status indicator and message.
+Could we also add a section from where I can export the report too?
 ```
 
-## API Development
+This added PDF (print), Markdown, and JSON export options.
 
-### Analyze Endpoint
+## Deployment Issues
+
+During Vercel deployment, I shared error logs and asked for fixes:
+
 ```
-Create an API endpoint that:
-1. Validates the URL
-2. Scrapes website content using Cheerio
-3. Sends content to OpenAI for UX analysis
-4. Saves results to database
-5. Returns review ID
+I got error while deploying: [pasted build logs]
 ```
 
-### LLM Prompt (Used in Production)
+Fixed issues included:
+- ESLint apostrophe escaping (`'` → `&apos;`)
+- TypeScript Set iteration (`[...new Set()]` → `Array.from(new Set())`)
+
+## The Main UX Analysis Prompt
+
+This is the prompt used in production to analyze websites:
+
 ```
 You are a senior UX designer and accessibility expert. Your task is to analyze websites and provide detailed, actionable UX feedback.
 
@@ -85,42 +86,6 @@ For each issue:
 Also provide before/after suggestions for the top 3 most impactful issues.
 ```
 
-## Styling
-
-### Tailwind Configuration
-```
-Set up Tailwind CSS with:
-- Primary color palette (blue-based)
-- Custom component classes (btn-primary, btn-secondary, card, input)
-- Responsive design utilities
-```
-
-## Database
-
-### Schema Design
-```
-Create a Prisma schema for storing reviews with:
-- id (unique identifier)
-- url (analyzed website)
-- title (page title)
-- issues (JSON string)
-- suggestions (JSON string)
-- score (0-100)
-- timestamps
-```
-
-## Debugging/Fixes
-
-### Error Handling
-```
-Add error handling for:
-- Invalid URLs
-- Failed website fetches
-- LLM API errors
-- Database connection issues
-Display user-friendly error messages
-```
-
 ---
 
-*Note: Actual AI responses are not included per requirements. These are the prompts/instructions given to the AI assistant.*
+*Note: Only prompts are included here, not the AI responses.*

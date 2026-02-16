@@ -1,85 +1,80 @@
 # AI Usage Notes
 
-This document describes how AI tools were used in building this project and what was manually verified.
+This document explains how I used AI tools to build this project and what I verified myself.
 
 ## LLM Used in the App
 
 **Provider**: Groq  
 **Model**: Llama 3.3 70B Versatile
 
-### Why Groq?
+### Why I Chose Groq
 
-1. **FREE**: Generous free tier with 30 requests/minute
-2. **Speed**: Extremely fast - powered by custom LPU hardware
-3. **Quality**: Llama 3.3 70B is one of the best open-source models
-4. **Reliability**: High uptime and consistent performance
-5. **No credit card required**: Can start using immediately
+I initially tried OpenAI (quota exceeded) and Google Gemini (model not found errors in my region). Groq worked immediately and offers:
 
-### How the LLM is Used
+1. **Free tier** - 30 requests/minute, no credit card needed
+2. **Fast responses** - Their custom LPU hardware is noticeably quick
+3. **Good quality** - Llama 3.3 70B produces solid UX analysis
+4. **JSON mode** - Returns structured data reliably
 
-The LLM receives:
-- Scraped website content (title, headings, forms, buttons, links, images, text)
-- A structured prompt asking for UX analysis
+### How the LLM Works in My App
 
-The LLM returns:
-- 8-12 UX issues categorized by type
-- Severity ratings (high/medium/low)
-- Evidence/proof from the page content
-- Before/after suggestions for top issues
-- Overall UX score (0-100)
+1. User submits a URL
+2. My scraper extracts: title, headings, forms, buttons, links, images, main text
+3. This content is sent to Groq with a structured prompt
+4. LLM returns JSON with issues, severity, proof, and suggestions
+5. Results are saved to Supabase and displayed to user
 
 ## AI Tools Used for Development
 
 ### Cursor AI (Claude)
 
-**Used for:**
-- Project scaffolding and file structure
-- Writing React components
-- Creating API routes
-- Implementing the scraper logic
-- Writing Tailwind CSS styles
-- Creating documentation
+I used Cursor throughout development for:
+- Setting up the Next.js project structure
+- Writing React components and pages
+- Creating the API routes
+- Building the web scraper with Cheerio
+- Styling with Tailwind CSS
+- Debugging deployment errors
+- Setting up Supabase database
 
-### What I Verified Myself
+## What I Did Myself
 
-1. **Architecture decisions**: Chose Next.js 14 with App Router, SQLite for simplicity
-2. **Technology choices**: Evaluated Puppeteer vs Cheerio, chose Cheerio for simpler scraping
-3. **Prompt engineering**: Tested and refined the UX analysis prompt
-4. **Error handling**: Added proper validation and error messages
-5. **UI/UX**: Reviewed and adjusted component styling for clarity
-6. **Security**: Ensured API keys are not exposed, validated user inputs
-7. **Database schema**: Designed the Review model structure
-8. **API design**: Planned REST endpoints and response formats
+### Decisions I Made
 
-### Code Review Checklist
+- **Tech stack**: Chose Next.js 14 because it's easy to deploy on Vercel and handles both frontend and API
+- **Database**: Started with SQLite for simplicity, switched to Supabase PostgreSQL for production
+- **LLM provider**: Tested multiple providers, settled on Groq after issues with others
+- **Scraping approach**: Used Cheerio instead of Puppeteer to avoid browser dependencies
 
-- [x] No hardcoded secrets or API keys
-- [x] Input validation on all user inputs
-- [x] Proper error handling with user-friendly messages
-- [x] TypeScript types are properly defined
-- [x] Components are reasonably structured
-- [x] Database queries use Prisma (SQL injection safe)
-- [x] CORS and security headers handled by Next.js
+### Things I Verified
+
+- Tested the app with multiple websites to ensure scraping works
+- Checked that the LLM responses parse correctly
+- Verified database operations (create, read, delete)
+- Tested export functionality (PDF, Markdown, JSON)
+- Made sure error messages are user-friendly
+- Confirmed no API keys are exposed in the code
+
+### Code I Reviewed
+
+- [x] Environment variables are properly configured
+- [x] URL validation prevents bad inputs
+- [x] Error handling shows helpful messages
+- [x] TypeScript types are correct
+- [x] Database queries use Prisma (safe from SQL injection)
 - [x] Responsive design works on mobile
 
-### Testing Performed
+## Limitations I'm Aware Of
 
-- Tested URL validation (valid/invalid URLs)
-- Tested scraping on multiple websites
-- Verified LLM responses are properly parsed
-- Checked database read/write operations
-- Tested status page health checks
-- Verified review history displays correctly
+1. **No screenshots** - Would need Puppeteer and a browser service
+2. **JavaScript-heavy sites** - Cheerio only gets static HTML
+3. **No rate limiting** - Could add if needed for production
+4. **Public reviews** - No user authentication yet
 
-## Limitations
+## What I Learned
 
-1. **No screenshot capture**: Would require Puppeteer with a browser service
-2. **Client-side JavaScript**: Pages that heavily rely on JS won't be fully scraped
-3. **Rate limiting**: No rate limiting implemented yet
-4. **Authentication**: No user accounts - all reviews are public
-
-## Future AI Considerations
-
-- Could add multi-model support (Anthropic Claude, Google Gemini)
-- Could use vision models for actual screenshot analysis
-- Could implement automated accessibility testing with AI
+- How to integrate LLM APIs into a web app
+- Structuring prompts for consistent JSON output
+- Deploying Next.js to Vercel with environment variables
+- Setting up Supabase PostgreSQL with Prisma
+- URL-encoding special characters in database passwords
