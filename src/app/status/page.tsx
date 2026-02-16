@@ -191,7 +191,7 @@ export default function StatusPage() {
         <p className="text-sm text-slate-600">
           This status page shows the health of the backend API, database connection, 
           and LLM integration. If any service shows an error, some features may not 
-          work correctly. The LLM service uses Groq's Llama 3.3 70B model for UX analysis (FREE and fast!).
+          work correctly. The LLM service uses Groq&apos;s Llama 3.3 70B model for UX analysis (FREE and fast!).
         </p>
       </div>
     </div>
