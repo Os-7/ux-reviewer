@@ -1,44 +1,22 @@
 # About Me
 
-## [Your Name Here]
+## [Omshree Samal]
 
-[Add your name]
+[Omshree Samal]
 
 ## Contact
 
-- **Email**: [your.email@example.com]
-- **LinkedIn**: [Your LinkedIn URL]
-- **GitHub**: [Your GitHub URL]
-- **Portfolio**: [Your Portfolio URL]
+- **Email**: [am.omsamal@gmail.com]
+- **LinkedIn**: [[Omshree Samal](https://www.linkedin.com/in/omshree-samal-5b5425228/?skipRedirect=true)]
+- **GitHub**: [[Os-7](https://github.com/Os-7)]
+- **Portfolio**: [[Omshree](https://os-7.github.io/portfolio/)]
 
 ## Resume
 
-[Paste your resume content here or link to it]
+[[Omshree Samal Resume](https://drive.google.com/file/d/1fEaj0dAI8nIginIti7fJjtPVqj4T0Lp0/view?usp=sharing)]
 
 ### Summary
 
-[Brief professional summary - 2-3 sentences about your background and expertise]
+[I’m a Software Engineer with hands-on experience in building semi-automated options trading systems powered by real-time data and technical indicators. My work focuses on low-latency data pipelines, strategy automation, and performance optimization to enhance trading efficiency and execution speed. Alongside trading infrastructure, I have experience in web development, enabling me to create seamless interfaces and visualization tools for data-driven insights. I’m passionate about applying engineering precision, algorithmic logic, and analytical thinking to design intelligent, high-performance trading solutions.]
 
-### Experience
 
-**[Job Title]** - [Company Name]  
-[Start Date] - [End Date]
-- [Achievement/responsibility 1]
-- [Achievement/responsibility 2]
-- [Achievement/responsibility 3]
-
-### Education
-
-**[Degree]** - [University Name]  
-[Graduation Year]
-
-### Skills
-
-- **Languages**: [e.g., JavaScript, TypeScript, Python]
-- **Frameworks**: [e.g., React, Next.js, Node.js]
-- **Tools**: [e.g., Git, Docker, AWS]
-- **Other**: [e.g., UI/UX Design, Agile]
-
----
-
-*Please update this file with your actual information before submitting.*
